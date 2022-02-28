@@ -34,7 +34,7 @@ class OneMax:
 
     def __init__(self):
 
-        self.prob_type = 'either'
+        self.prob_type = 'discrete'
 
     def evaluate(self, state):
         """Evaluate the fitness of a state vector.
@@ -52,6 +52,9 @@ class OneMax:
 
         fitness = np.sum(state)
         return fitness
+
+    def reset(self):
+        pass
 
     def get_prob_type(self):
         """ Return the problem type.

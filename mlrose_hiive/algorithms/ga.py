@@ -129,9 +129,9 @@ def genetic_alg(problem, pop_size=200, pop_breed_percent=0.75, elite_dreg_ratio=
     if (mutation_prob < 0) or (mutation_prob > 1):
         raise Exception("""mutation_prob must be between 0 and 1.""")
 
-    if (not isinstance(max_attempts, int) and not max_attempts.is_integer()) \
-       or (max_attempts < 0):
-        raise Exception("""max_attempts must be a positive integer.""")
+    # if (not isinstance(max_attempts, int) and not max_attempts.is_integer()) \
+    #    or (max_attempts < 0):
+    #     raise Exception("""max_attempts must be a positive integer.""")
 
     if (not isinstance(max_iters, int) and max_iters != np.inf
             and not max_iters.is_integer()) or (max_iters < 0):
@@ -176,7 +176,7 @@ def genetic_alg(problem, pop_size=200, pop_breed_percent=0.75, elite_dreg_ratio=
         breeding_pop_size -= over_population
 
     continue_iterating = True
-    while (attempts < max_attempts) and (iters < max_iters):
+    while (attempts < max_attempts) and (iters < max_iters) and not problem.can_stop():
         iters += 1
         problem.current_iteration += 1
 

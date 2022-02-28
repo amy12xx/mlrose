@@ -74,9 +74,9 @@ def mimic(problem, pop_size=200, keep_pct=0.2, max_attempts=10,
     if (keep_pct < 0) or (keep_pct > 1):
         raise Exception("""keep_pct must be between 0 and 1.""")
 
-    if (not isinstance(max_attempts, int) and not max_attempts.is_integer()) \
-       or (max_attempts < 0):
-        raise Exception("""max_attempts must be a positive integer.""")
+    # if (not isinstance(max_attempts, int) and not max_attempts.is_integer()) \
+    #    or (max_attempts < 0):
+    #     raise Exception("""max_attempts must be a positive integer.""")
 
     if (not isinstance(max_iters, int) and max_iters != np.inf
             and not max_iters.is_integer()) or (max_iters < 0):
@@ -108,7 +108,7 @@ def mimic(problem, pop_size=200, keep_pct=0.2, max_attempts=10,
     iters = 0
 
     continue_iterating = True
-    while (attempts < max_attempts) and (iters < max_iters):
+    while (attempts < max_attempts) and (iters < max_iters) and not problem.can_stop():
         iters += 1
         problem.current_iteration += 1
 

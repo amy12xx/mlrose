@@ -35,10 +35,10 @@ class DiscreteOpt(_OptProb):
     """
 
     def __init__(self, length, fitness_fn, maximize=True, max_val=2,
-                 crossover=None, mutator=None):
+                 crossover=None, mutator=None, best_val=None):
         self._get_mutual_info_impl = self._get_mutual_info_slow
 
-        _OptProb.__init__(self, length, fitness_fn, maximize)
+        _OptProb.__init__(self, length, fitness_fn, maximize, best_val=best_val)
 
         if self.fitness_fn.get_prob_type() == 'continuous':
             raise Exception("""fitness_fn must have problem type 'discrete',"""
@@ -69,6 +69,7 @@ class DiscreteOpt(_OptProb):
 
         self._mut_mask = None
         self._mut_inf = None
+        self.best_val = best_val
 
     def eval_node_probs(self):
         """Update probability density estimates.

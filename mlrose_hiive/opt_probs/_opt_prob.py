@@ -20,7 +20,7 @@ class _OptProb:
         Set :code:`False` for minimization problem.
     """
 
-    def __init__(self, length, fitness_fn, maximize=True):
+    def __init__(self, length, fitness_fn, maximize=True, best_val=None):
 
         if length < 0:
             raise Exception("""length must be a positive integer.""")
@@ -43,6 +43,7 @@ class _OptProb:
         self.fevals = {}
         self.fitness_evaluations = 0
         self.current_iteration = 0
+        self.best_val = None
 
         if maximize:
             self.maximize = 1.0
@@ -240,4 +241,6 @@ class _OptProb:
         self.fitness = self.eval_fitness(self.state)
 
     def can_stop(self):
+        if self.best_val is not None and self.fitness == self.best_val:
+            return True
         return False
